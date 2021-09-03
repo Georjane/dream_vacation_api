@@ -1,5 +1,5 @@
 class HotelsController < ApplicationController
-  before_action :set_hotel, only: :destroy
+  before_action :set_hotel, only: %i[show destroy]
      # GET /hotels
      def index
        @hotels = Hotel.all
@@ -14,6 +14,10 @@ class HotelsController < ApplicationController
          render json: @hotel.errors, status: :unprocessable_entity
        end
      end
+     # GET /hotels/:id
+     def show
+      render json: HotelRepresenter.new(@hotel).as_json
+    end
      # DELETE /hotels/:id
      def destroy
        @hotel.destroy
