@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/stympy/faker.git
+  revision: e32f096bb03c8a41f9f6f80f75328585fbfe0b0e
+  specs:
+    faker (2.19.0)
+      i18n (>= 1.6, < 2)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -80,8 +87,6 @@ GEM
     factory_bot_rails (6.2.0)
       factory_bot (~> 6.2.0)
       railties (>= 5.0.0)
-    faker (2.19.0)
-      i18n (>= 1.6, < 2)
     figaro (1.2.0)
       thor (>= 0.14.0, < 2)
     globalid (0.5.2)
@@ -198,7 +203,7 @@ DEPENDENCIES
   byebug
   database_cleaner
   factory_bot_rails (~> 6.1)
-  faker
+  faker!
   figaro
   pg (~> 1.1)
   puma (~> 5.0)

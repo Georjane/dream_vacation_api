@@ -48,4 +48,45 @@ RSpec.describe "Hotels", type: :request do
       expect(response).to have_http_status(204)
     end
   end
+
+  describe 'GET /hotels/:id' do
+    before { get "/hotels/#{hotel_id}" }
+    context 'when hotel exists' do
+      it 'returns status code 200' do
+        expect(response).to have_http_status(200)
+      end
+      it 'returns the hotel item' do
+        expect(json['id']).to eq(hotel_id)
+      end
+    end
+    context 'when hotel does not exist' do
+      let(:hotel_id) { 0 }
+      it 'returns status code 404' do
+        expect(response).to have_http_status(404)
+      end
+      it 'returns a not found message' do
+        expect(response.body).to include("Couldn't find hotel with 'id'=0")
+      end
+    end
+  end
+  describe 'POST /hotels/:id' do
+    let(:valid_attributes) do
+      { title: 'Hotel name', description: 'Hotel description', image_url: 'image.png'}
+    end
+    context 'when request attributes are valid' do
+      before { post '/hotels', params: valid_attributes }
+      it 'returns status code 201' do
+        expect(response).to have_http_status(201)
+      end
+    end
+    context 'when an invalid request' do
+      before { post '/hotels', params: {} }
+      it 'returns status code 422' do
+        expect(response).to have_http_status(422)
+      end
+      it 'returns a failure message' do
+        expect(response.body).to include("can't be blank")
+      end
+    end
+  end
 end
