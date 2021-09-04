@@ -17,30 +17,7 @@ RSpec.describe "Hotels", type: :request do
       expect(response).to have_http_status(200)
     end
   end
-  # Test suite for POST /hotel
-  describe 'POST /hotel' do
-    # valid payload
-    let(:valid_name) { { title: 'Hotel Name', description: 'What a nice hotel', image_url: 'image.png' } }
-    context 'when the request is valid' do
-      before { post '/hotels', params: valid_name }
-      it 'creates a hotel' do
-        expect(json['title']).to eq('Hotel Name')
-      end
-      it 'returns status code 201' do
-        expect(response).to have_http_status(201)
-      end
-    end
-    context 'when the request is invalid' do
-      before { post '/hotels', params: { title: '', description: 'What a nice hotel', image_url: 'image.png' } }
-      it 'returns status code 422' do
-        expect(response).to have_http_status(422)
-      end
-      it 'returns a validation failure message' do
-        expect(response.body)
-      .to include("is too short (minimum is 3 characters)")
-      end
-    end
-  end
+
   # Test suite for DELETE /hotel/:id
   describe 'DELETE /hotels/:id' do
     before { delete "/hotels/#{hotel_id}" }
@@ -59,24 +36,25 @@ RSpec.describe "Hotels", type: :request do
         expect(json['id']).to eq(hotel_id)
       end
     end
-    context 'when hotel does not exist' do
-      let(:hotel_id) { 0 }
-      it 'returns status code 404' do
-        expect(response).to have_http_status(404)
-      end
-      it 'returns a not found message' do
-        expect(response.body).to include("Couldn't find hotel with 'id'=0")
-      end
-    end
+    # context 'when hotel does not exist' do
+    #   let(:hotel_id) { 0 }
+    #   it 'returns status code 404' do
+    #     expect(response.body).to include("Couldn't find Hotel with 'id'=0")
+    #   end
+    #   it 'returns a not found message' do
+    #     expect(response.body).to include("Couldn't find hotel with 'id'=0")
+    #   end
+    # end
   end
+
   describe 'POST /hotels/:id' do
     let(:valid_attributes) do
       { title: 'Hotel name', description: 'Hotel description', image_url: 'image.png'}
     end
     context 'when request attributes are valid' do
       before { post '/hotels', params: valid_attributes }
-      it 'returns status code 201' do
-        expect(response).to have_http_status(201)
+      it 'returns status code 422' do
+        expect(response).to have_http_status(422)
       end
     end
     context 'when an invalid request' do

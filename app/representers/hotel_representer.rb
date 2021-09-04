@@ -5,7 +5,7 @@ class HotelRepresenter
   def as_json
     { id: hotel.id,
       title: hotel.title,
-      description: hotel.author,
+      description: hotel.description,
       image_url: hotel.image_url,
     }
   end

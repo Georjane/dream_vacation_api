@@ -9,7 +9,7 @@ class HotelsRepresenter
      {
        id: hotel.id,
        title: hotel.title,
-       description: hotel.author,
+       description: hotel.description,
        image_url: hotel.image_url,
      }
    end

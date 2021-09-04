@@ -15,7 +15,7 @@ class HotelsController < ApplicationController
        end
      end
      # GET /hotels/:id
-     def show
+    def show
       render json: HotelRepresenter.new(@hotel).as_json
     end
      # DELETE /hotels/:id
@@ -30,5 +30,4 @@ class HotelsController < ApplicationController
      def set_hotel
        @hotel = Hotel.find(params[:id])
      end
-   end
 end
