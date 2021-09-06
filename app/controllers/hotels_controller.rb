@@ -25,7 +25,7 @@ class HotelsController < ApplicationController
      end
      private
      def hotel_params
-       params.permit(:name)
+       params.permit(:name, :user_id)
      end
      def set_hotel
        @hotel = Hotel.find(params[:id])
