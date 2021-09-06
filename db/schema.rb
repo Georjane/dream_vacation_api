@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_09_03_104849) do
+ActiveRecord::Schema.define(version: 2021_09_06_095628) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "adminpack"
@@ -22,6 +22,16 @@ ActiveRecord::Schema.define(version: 2021_09_03_104849) do
     t.string "image_url"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_hotels_on_user_id"
   end
 
+  create_table "users", force: :cascade do |t|
+    t.string "username"
+    t.string "password_digest"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  add_foreign_key "hotels", "users"
 end
