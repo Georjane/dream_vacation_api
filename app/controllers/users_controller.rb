@@ -7,6 +7,11 @@ class UsersController < ApplicationController
       render json: { error: user.errors.full_messages.first }, status: :unprocessable_entity
     end
   end
+  def index
+    users = User.all
+
+    render json: UsersRepresenter.new(users).as_json
+  end
    private
    def user_params
     params.require(:user).permit(:username, :password)

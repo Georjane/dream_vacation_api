@@ -8,7 +8,7 @@ class HotelsController < ApplicationController
      end
      # POST /hotel
      def create
-       @hotel = Hotel.create(hotel_params)
+       @hotel = current_user!.hotels.create(hotel_params)
        if @hotel.save
          render json: HotelRepresenter.new(@hotel).as_json, status: :created
        else
